@@ -9,6 +9,30 @@ prophecy heard three times already this week, the throne buried under
 laundry, the goblin union's paperwork — never in a plain statement
 that he is weary. The sting lands in the last line: the hero is
 offered tea, not a duel.
+
+How it runs
+-----------
+``python3 main.py`` writes the TEXT constant verbatim to
+``/output/entry.txt`` (creating ``/output`` if needed) and exits 0.
+There is no input, no network, and no templating: the file's bytes are
+exactly the string above, so the judged text cannot drift between runs.
+
+Verification
+------------
+The competition gate requires ``/output/entry.txt`` to be UTF-8 text of
+1-600 characters, not only whitespace. This entry is exactly 100 words
+and 554 characters, so it passes with room to spare. Re-verify with::
+
+    python3 main.py
+    sha256sum /output/entry.txt   # expect 3d9af217a667c03af88ebd68edf38c123fb879a155ec1f4761839517d9227104
+    wc -w /output/entry.txt      # 100
+
+Em dashes
+---------
+The two em dashes in the monologue are written in the source as the
+``\u2014`` escape rather than a literal U+2014 character. This keeps the
+source file plain ASCII, so no editor or tool can silently re-encode
+them (e.g. as an en dash or a hyphen) and change the judged text.
 """
 
 import os
